@@ -176,3 +176,20 @@ const st = document.createElement("style");
 st.innerHTML = `@keyframes rise{to{transform:translateY(-110vh);opacity:0}}`;
 
 document.head.appendChild(st);
+
+
+  const audio = document.getElementById("bgAudio");
+
+  // Ensure it starts from the beginning
+  audio.currentTime = 0;
+
+  // Unmute after any user interaction
+  const enableAudio = () => {
+    audio.muted = false;
+    audio.play().catch(() => {});
+    document.removeEventListener("click", enableAudio);
+    document.removeEventListener("keydown", enableAudio);
+  };
+
+  document.addEventListener("click", enableAudio);
+  document.addEventListener("keydown", enableAudio);
